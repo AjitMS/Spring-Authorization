@@ -1,7 +1,7 @@
 # springboot-jwt
-## An Example Spring Boot Application for Securing a REST API with JSON Web Token (JWT)
+## Spring Boot Application for Securing a REST API with JSON Web Token (JWT)
 
-This application can be used as a seed to quick start your spring boot REST API project with a fully functional security module.
+This application is based on spring boot REST API project with a fully functional security module.
 
 ## Main building blocks
  * Spring Boot 1.5.3.RELEASE go to http://docs.spring.io/spring-boot/docs/1.5.3.RELEASE/reference/htmlsingle/ to learn more about spring boot
@@ -24,8 +24,10 @@ Use one of the several ways of running a Spring Boot application. Below are just
  * secret: XY7kmzoNzl100
  * Non-admin username and password: john.doe and jwtpass
  * Admin user: admin.admin and jwtpass
- * Example of resource accessible to all authenticated users:  http://localhost:8080/springjwt/cities
- * Example of resource accessible to only an admin user:  http://localhost:8080/springjwt/users
+ * Example of resource accessible to all authenticated users:  http://localhost:8080/springjwt/users
+ * Example of resource accessible to only an admin user:  http://localhost:8080/springjwt/users/{userName}
+
+(Above details can be set according to user convenience)
 
  1. Generate an access token
 
@@ -50,44 +52,11 @@ Use one of the several ways of running a Spring Boot application. Below are just
     * Access content available to all authenticated users
 
         Use the generated token  as the value of the Bearer in the Authorization header as follows:
-        `curl  http://localhost:8080/springjwt/cities -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsidGVzdGp3dHJlc291cmNlaWQiXSwidXNlcl9uYW1lIjoiYWRtaW4uYWRtaW4iLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNDk0NDU0MjgyLCJhdXRob3JpdGllcyI6WyJTVEFOREFSRF9VU0VSIiwiQURNSU5fVVNFUiJdLCJqdGkiOiIwYmQ4ZTQ1MC03ZjVjLTQ5ZjMtOTFmMC01Nzc1YjdiY2MwMGYiLCJjbGllbnRfaWQiOiJ0ZXN0and0Y2xpZW50aWQifQ.rvEAa4dIz8hT8uxzfjkEJKG982Ree5PdUW17KtFyeec" `
+        `curl  http://localhost:8080/springjwt/users -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsidGVzdGp3dHJlc291cmNlaWQiXSwidXNlcl9uYW1lIjoiYWRtaW4uYWRtaW4iLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNDk0NDU0MjgyLCJhdXRob3JpdGllcyI6WyJTVEFOREFSRF9VU0VSIiwiQURNSU5fVVNFUiJdLCJqdGkiOiIwYmQ4ZTQ1MC03ZjVjLTQ5ZjMtOTFmMC01Nzc1YjdiY2MwMGYiLCJjbGllbnRfaWQiOiJ0ZXN0and0Y2xpZW50aWQifQ.rvEAa4dIz8hT8uxzfjkEJKG982Ree5PdUW17KtFyeec" `
 
         The response will be:
         `
-        [
-          {
-            "id": 1,
-            "name": "Bamako"
-          },
-          {
-            "id": 2,
-            "name": "Nonkon"
-          },
-          {
-            "id": 3,
-            "name": "Houston"
-          },
-          {
-            "id": 4,
-            "name": "Toronto"
-          },
-          {
-            "id": 5,
-            "name": "New York"
-          },
-          {
-            "id": 6,
-            "name": "Mopti"
-          },
-          {
-            "id": 7,
-            "name": "Koulikoro"
-          },
-          {
-            "id": 8,
-            "name": "Moscow"
-          }
-        ]`
+      [{"id":1,"username":"john","firstName":"John","lastName":"Doe","roles":[{"id":1,"roleName":"STANDARD_USER","description":"Standard User - Has no admin rights"}]},{"id":2,"username":"admin","firstName":"Admin","lastName":"Admin","roles":[{"id":1,"roleName":"STANDARD_USER","description":"Standard User - Has no admin rights"},{"id":2,"roleName":"ADMIN_USER","description":"Admin User - Has permission to perform admin tasks"}]}]
 
     * Access content available only to an admin user
 
