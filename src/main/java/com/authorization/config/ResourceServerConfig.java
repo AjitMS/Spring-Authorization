@@ -32,4 +32,13 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/actuator/**", "/api-docs/**").permitAll()
                 .antMatchers("/springjwt/**" ).authenticated();
     }
+    
+    
+    /*@Override
+	public void configure(HttpSecurity http) throws Exception {
+		http.requestMatchers().and().authorizeRequests().antMatchers("/actuator/**", "/api-docs/**").permitAll().and()
+				.authorizeRequests().antMatchers("/users/**").hasAnyRole("STANDARD_USER", "ADMIN_USER").anyRequest()
+				.authenticated().and().authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN_USER").anyRequest()
+				.authenticated().and().csrf().disable();
+	}*/
 }

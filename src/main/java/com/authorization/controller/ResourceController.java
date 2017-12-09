@@ -21,7 +21,7 @@ public class ResourceController {
 	@RequestMapping(value = "/users/{name}")
 	@PreAuthorize("hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')")
 	public User getUser(@PathVariable("name") String username) {
-		System.out.println("Name got: "+username);
+		System.out.println("Name got: " + username);
 		return userService.findByUsername(username);
 	}
 

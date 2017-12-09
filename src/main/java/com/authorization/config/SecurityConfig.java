@@ -44,21 +44,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService)
-		        .passwordEncoder(new ShaPasswordEncoder(encodingStrength));
+		auth.userDetailsService(userDetailsService).passwordEncoder(new ShaPasswordEncoder(encodingStrength));
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
-		        .sessionManagement()
-		        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-		        .and()
-		        .httpBasic()
-		        .realmName(securityRealm)
-		        .and()
-		        .csrf()
-		        .disable();
+		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().httpBasic()
+				.realmName(securityRealm).and().csrf().disable();
 
 	}
 
@@ -75,7 +67,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-	@Primary //Making this primary to avoid any accidental duplication with another token service instance of the same name
+	@Primary // Making this primary to avoid any accidental duplication with another token
+				// service instance of the same name
 	public DefaultTokenServices tokenServices() {
 		DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
 		defaultTokenServices.setTokenStore(tokenStore());
